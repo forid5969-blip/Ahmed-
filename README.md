@@ -84,6 +84,55 @@ Tickerline is a complete financial trading and algorithmic intelligence platform
 
 ---
 
+## 🌐 Deploying to GitHub Pages (Fixing Blank White Page)
+
+### Why Does a Blank White Page Happen?
+When deploying a Vite/React application to GitHub Pages, a blank white page occurs for two main reasons:
+1. **GitHub Pages Source is set to Deploy from Branch (`/ root`)**:
+   By default, GitHub Pages serves the root directory (`/`) of your `main` branch. In the root directory, `index.html` references `<script type="module" src="/src/main.tsx"></script>`. Browsers cannot run unbundled `.tsx` files directly, throwing a `404` or MIME-type error in the browser console (`Failed to load module script`), leaving `<div id="root"></div>` completely blank.
+2. **Missing Base Path & Jekyll Filtering**:
+   If the base path is not set to relative (`./`), assets fail to load from GitHub's repository subfolder (`https://<username>.github.io/<repo>/`). Furthermore, GitHub's default Jekyll engine ignores directories with leading underscores unless `.nojekyll` exists.
+
+---
+
+### How It Has Been Fixed in This Project:
+- **`vite.config.ts`**: Configured with `base: './'` for universal relative asset resolution.
+- **`public/.nojekyll`**: Automatically copied to `dist/` to disable Jekyll processing.
+- **`dist/404.html`**: Automatically generated on build so deep links and direct page reloads don't result in GitHub 404s.
+- **`package.json`**: Pre-configured with `gh-pages` and `"deploy": "gh-pages -d dist"`.
+- **`.github/workflows/deploy.yml`**: Pre-configured GitHub Actions workflow for zero-configuration automated deployment.
+
+---
+
+### Step-by-Step Deployment (Choose either Option A or Option B):
+
+#### Option A: Using GitHub Actions (Recommended — 100% Automated)
+1. Push your repository to GitHub.
+2. In your GitHub repository:
+   - Navigate to **Settings** > **Pages** (under the left sidebar "Code and automation").
+   - Under **Build and deployment** > **Source**, change the dropdown from **"Deploy from a branch"** to **"GitHub Actions"**.
+3. Push any commit to `main` (or trigger it under the **Actions** tab by clicking "Run workflow").
+4. GitHub Actions will install dependencies, build the production `dist/` bundle, and deploy the live site automatically with zero blank screen!
+
+#### Option B: Using the `gh-pages` Command (One Command)
+If you prefer deploying from your terminal:
+1. Ensure your git remote is set:
+   ```bash
+   git remote add origin https://github.com/<your-username>/<your-repo-name>.git
+   ```
+2. Run the deploy script:
+   ```bash
+   npm run deploy
+   ```
+   *(This builds `dist/` and automatically creates & pushes to the `gh-pages` branch).*
+3. In your GitHub repository:
+   - Navigate to **Settings** > **Pages**.
+   - Under **Build and deployment** > **Source**, ensure it is set to **"Deploy from a branch"**.
+   - Select Branch: **`gh-pages`** and folder: **`/ (root)`**, then click **Save**.
+4. Your site will be live immediately!
+
+---
+
 ## 📁 Project Structure
 
 ```

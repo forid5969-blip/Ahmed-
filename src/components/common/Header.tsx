@@ -480,6 +480,28 @@ export const Header: React.FC = () => {
                 </div>
               </div>
 
+              {/* GitHub Pages Deployment Note */}
+              <div className="p-3.5 bg-neutral-100 dark:bg-neutral-800/60 rounded-xl space-y-2 text-xs">
+                <div className="font-semibold text-neutral-900 dark:text-white flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <Globe className="w-4 h-4 text-emerald-500" />
+                    Deploying to GitHub Pages?
+                  </span>
+                  <span className="text-[10px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded font-medium">Zero Blank Screen</span>
+                </div>
+                <p className="text-[11px] text-neutral-600 dark:text-neutral-400">
+                  If you see a blank white page, it is because GitHub Pages defaults to serving uncompiled source code from root (<code className="font-mono text-emerald-500">/</code>).
+                </p>
+                <div className="font-mono text-[11px] bg-neutral-950 text-neutral-200 p-3 rounded-lg space-y-1.5">
+                  <div className="text-neutral-400 font-sans font-semibold">Option A (Recommended - GitHub Actions):</div>
+                  <div className="text-neutral-300">1. Repo Settings → Pages → Source: Select <span className="text-emerald-400">"GitHub Actions"</span></div>
+                  <div className="text-neutral-300">2. Push your code. <span className="text-neutral-500">(Workflow automatically builds and deploys dist)</span></div>
+                  <div className="text-neutral-400 font-sans font-semibold pt-1">Option B (One-Command Deploy):</div>
+                  <div className="text-emerald-400">npm run deploy</div>
+                  <div className="text-neutral-500"># Pushes production dist to gh-pages branch</div>
+                </div>
+              </div>
+
               {/* Note on Google AI Studio UI download */}
               <div className="p-3 bg-neutral-50 dark:bg-neutral-800/40 rounded-xl text-[11px] text-neutral-500 leading-relaxed">
                 <strong>Google AI Studio UI Option:</strong> You can also export or download this project directly using the top-right AI Studio project menu (select <em>Export to GitHub</em> or <em>Download Code</em> in the header toolbar).
