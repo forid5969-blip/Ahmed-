@@ -1,0 +1,6 @@
+{
+  "name": "Tickerline",
+  "description": "Complete Indian and global trading platform featuring charts, signals, pattern recognition, backtesting, auto-trading bots, IPOs, loans, and community dashboards for traders and staff.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
